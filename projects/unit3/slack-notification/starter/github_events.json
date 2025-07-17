@@ -1,0 +1,11 @@
+[
+  {
+    "timestamp": "2025-07-17T11:08:01.280539",
+    "event_type": "ping",
+    "action": null,
+    "workflow_run": null,
+    "check_run": null,
+    "repository": "Sandhya03242/mcp-course",
+    "sender": "Sandhya03242"
+  }
+]
