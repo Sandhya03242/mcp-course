@@ -16,5 +16,14 @@
     "check_run": null,
     "repository": "Sandhya03242/mcp-course",
     "sender": "Sandhya03242"
+  },
+  {
+    "timestamp": "2025-07-18T03:25:33.265272",
+    "event_type": "ping",
+    "action": null,
+    "workflow_run": null,
+    "check_run": null,
+    "repository": "Sandhya03242/mcp-course",
+    "sender": "Sandhya03242"
   }
 ]
