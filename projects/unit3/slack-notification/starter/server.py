@@ -15,8 +15,34 @@ from mcp.types import TextContent
 
 from mcp.server.fastmcp import FastMCP
 
+# --------------------------------------------------------------------------------------------------------------
+from dotenv import load_dotenv
+from openai import OpenAI
+load_dotenv()
+
+# --------------------------------------------------------------------------------------------------------------
+
 # Initialize the FastMCP server
+
 mcp = FastMCP("pr-agent-slack")
+# ---------------------------------------------------------------------------------------------------------------
+api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI()
+
+@mcp.tool()
+async def chat_with_gpt(input_text: str) -> str:
+    """
+    Calls OpenAI GPT model with user input and returns the completion.
+    """
+    response = client.chat.completions.create(
+        model="gpt-4.1-nano",
+        messages=[
+            {"role": "user", "content": input_text}
+        ]
+    )
+    return response.choices[0].message.content
+
+# --------------------------------------------------------------------------------------------------------------
 
 # PR template directory (shared between starter and solution)
 TEMPLATES_DIR = Path(__file__).parent.parent.parent / "templates"
@@ -146,7 +172,7 @@ async def get_pr_templates() -> str:
 
 @mcp.tool()
 async def suggest_template(changes_summary: str, change_type: str) -> str:
-    """Let Claude analyze the changes and suggest the most appropriate PR template.
+    """Let analyze the changes and suggest the most appropriate PR template.
     
     Args:
         changes_summary: Your analysis of what the changes do
@@ -168,7 +194,7 @@ async def suggest_template(changes_summary: str, change_type: str) -> str:
         "recommended_template": selected_template,
         "reasoning": f"Based on your analysis: '{changes_summary}', this appears to be a {change_type} change.",
         "template_content": selected_template["content"],
-        "usage_hint": "Claude can help you fill out this template based on the specific changes in your PR."
+        "usage_hint": "Model can help you fill out this template based on the specific changes in your PR."
     }
     
     return json.dumps(suggestion, indent=2)
