@@ -1,0 +1,2 @@
+"Check recent CI events, find any failures, format them as a Slack alert, and send to the team"
+

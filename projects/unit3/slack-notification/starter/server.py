@@ -172,7 +172,7 @@ async def get_pr_templates() -> str:
 
 @mcp.tool()
 async def suggest_template(changes_summary: str, change_type: str) -> str:
-    """Let analyze the changes and suggest the most appropriate PR template.
+    """Let GPT analyze the changes and suggest the most appropriate PR template.
     
     Args:
         changes_summary: Your analysis of what the changes do
